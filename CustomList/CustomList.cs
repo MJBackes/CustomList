@@ -76,6 +76,30 @@ namespace MyCustomList
             }
             return output;
         }
+        public static CustomList<T> operator -(CustomList<T> list1, CustomList<T> list2)
+        {
+            bool hasAppeared;
+            CustomList<T> tempList2 = new CustomList<T>();
+            tempList2.DuplicateList(list2);
+            CustomList<T> output = new CustomList<T>();
+            for (int i = 0; i < list1.Count; i++)
+            {
+                hasAppeared = false;
+                for(int j = 0; j < tempList2.count; j++)
+                {
+                    if(list1[i].Equals(tempList2[j]))
+                    {
+                        hasAppeared = true;
+                        tempList2.Remove(tempList2[j]);
+                    }
+                }
+                if (!hasAppeared)
+                {
+                    output.Add(list1[i]);
+                }
+            }
+            return output;
+        }
         private T[] DoubleStorageSize(T[] input)
         {
             capacity *= 2;
@@ -87,6 +111,13 @@ namespace MyCustomList
         {
             for(int i = 0; i < smallArray.Length; i++) {
                 largeArray[i] = smallArray[i];
+            }
+        }
+        public void DuplicateList(CustomList<T> input)
+        {
+            for(int i = 0; i < input.Count; i++)
+            {
+                Add(input[i]);
             }
         }
     }

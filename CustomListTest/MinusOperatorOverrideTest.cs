@@ -61,5 +61,26 @@ namespace CustomListTest
             //assert
             Assert.AreEqual(expected, actual.ToString());
         }
+        [TestMethod]
+        public void MinusOperator_ListWithMultipleInstancesOfAnObjectHasThatObjectSubtractedFromIt_OnlyOneOfThoseInstancesIsRemoved()
+        {
+            //arrange
+            string expected = "AAB";
+            CustomList<char> actual;
+            CustomList<char> list1 = new CustomList<char>();
+            CustomList<char> list2 = new CustomList<char>();
+            list1.Add('A');
+            list1.Add('A');
+            list1.Add('A');
+            list1.Add('B');
+            list1.Add('B');
+            list2.Add('A');
+            list2.Add('B');
+            list2.Add('C');
+            //act
+            actual = list1 - list2;
+            //assert
+            Assert.AreEqual(expected, actual.ToString());
+        }
     }
 }
