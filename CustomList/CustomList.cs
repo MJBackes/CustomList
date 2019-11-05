@@ -54,6 +54,15 @@ namespace MyCustomList
             count--;
             return foundObjectToBeRemoved;
         }
+        public override string ToString()
+        {
+            StringBuilder output = new StringBuilder("");
+            for (int i = 0; i < count; i++)
+            {
+                output.Append(internalStorage[i].ToString());
+            }
+            return output.ToString();
+        }
         private T[] DoubleStorageSize(T[] input)
         {
             capacity *= 2;

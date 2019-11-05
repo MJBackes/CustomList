@@ -10,7 +10,13 @@ namespace MyCustomList
     {
         static void Main(string[] args)
         {
-            List<int> list = new List<int>() {1, 2 };
+            CustomList<char> list = new CustomList<char>();
+            list.Add('h');
+            list.Add('e');
+            list.Add('l');
+            list.Add('l');
+            list.Add('o');
+
             Console.WriteLine(list.ToString());
             Console.ReadLine();
         }
