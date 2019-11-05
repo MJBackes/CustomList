@@ -100,6 +100,34 @@ namespace MyCustomList
             }
             return output;
         }
+        public CustomList<T> Zip(CustomList<T> list2)
+        {
+            int maxLength = GetLongestList(this, list2).Count;
+            CustomList<T> output = new CustomList<T>();
+            for(int i = 0; i < maxLength; i++)
+            {
+                if (i < Count)
+                {
+                    output.Add(internalStorage[i]);
+                }
+                if (i < list2.Count)
+                {
+                    output.Add(list2[i]);
+                }
+            }
+            return output;
+        }
+        private CustomList<T> GetLongestList(CustomList<T> list1, CustomList<T> list2)
+        {
+            if(list1.Count >= list2.Count)
+            {
+                return list1;
+            }
+            else
+            {
+                return list2;
+            }
+        }
         private T[] DoubleStorageSize(T[] input)
         {
             capacity *= 2;
