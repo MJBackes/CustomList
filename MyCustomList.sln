@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29418.71
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCustomList", "MyCustomList.csproj", "{CD193C7F-104E-432B-B1EB-3CFE21060386}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCustomList", "CustomList\MyCustomList.csproj", "{CD193C7F-104E-432B-B1EB-3CFE21060386}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomListTest", "..\CustomListTest\CustomListTest.csproj", "{968EE204-2E06-4298-9A04-3CDFEFAD56C3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomListTest", "CustomListTest\CustomListTest.csproj", "{968EE204-2E06-4298-9A04-3CDFEFAD56C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +26,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {B55F1A08-528A-497A-A4DC-056DB9720F17}
+		SolutionGuid = {306EB9F7-71B3-4472-83D9-835BB294D5E9}
 	EndGlobalSection
 EndGlobal

@@ -29,6 +29,16 @@ namespace CustomListTest
             //assert
             Assert.AreEqual(expected, actual);
         }
+        [TestMethod]
+        public void ToStringMethod_ListIsEmpty_OutputIsEmptyString()
+        {
+            CustomList<int> list = new CustomList<int>();
+            string expected = "";
+            string actual;
 
+            actual = list.ToString();
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
