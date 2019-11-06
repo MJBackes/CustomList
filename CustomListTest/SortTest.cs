@@ -17,7 +17,7 @@ namespace CustomListTest
             string expected = "123456789";
             string actual;
 
-            //list = list.Sort();
+            list.Sort();
             actual = list.ToString();
 
             Assert.AreEqual(expected, actual);
@@ -30,7 +30,7 @@ namespace CustomListTest
             string expected = "abcdef";
             string actual;
 
-        //    list = list.Sort();
+            list.Sort();
             actual = list.ToString();
 
             Assert.AreEqual(expected, actual);
@@ -43,7 +43,7 @@ namespace CustomListTest
             string expected = "12234566789";
             string actual;
 
-          //  list = list.Sort();
+            list.Sort();
             actual = list.ToString();
 
             Assert.AreEqual(expected, actual);

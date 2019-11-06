@@ -172,6 +172,84 @@ namespace MyCustomList
             }
             return output;
         }
+        public void Sort()
+        {
+                //if(count <= 16)
+                //{
+                InsertionSort();
+                //}
+                //else
+                //{
+                //    QuickSort();
+                //}
+        }
+        private void InsertionSort()
+        {
+
+            for(int i = 1; i < count; i++)
+            {
+                int index = i;
+                while(index > 0)
+                {
+                    if(Comparer<T>.Default.Compare(internalStorage[index], internalStorage[index - 1]) < 0)
+                    {
+                        Swap(index, index - 1);
+                        index--;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+        }
+        private void QuickSort()
+        {
+            int pivot = GetPivot();
+        }
+        private int GetPivot()
+        {
+            if(Count < 3)
+            {
+                return 0;
+            }
+            CustomList<T> MedianFinder = new CustomList<T> { internalStorage[0], internalStorage[Count / 2], internalStorage[Count - 1] };
+            MedianFinder.InsertionSort();
+            if (EqualityComparer<T>.Default.Equals(internalStorage[0], MedianFinder[1])){
+                return 0;
+            }
+            else if (EqualityComparer<T>.Default.Equals(internalStorage[Count/2], MedianFinder[1])){
+                return Count/2;
+            }
+            else
+            {
+                return Count - 1;
+            }
+        }
+        public void MoveLargerElementsToTheRightOf(int index)
+        {
+            T[] tempList = new T[capacity];
+            int tempIndex = 0;
+            for(int i = 0; i < count; i++)
+            {
+                if(Comparer<T>.Default.Compare(internalStorage[index], internalStorage[i]) > 0)
+                {
+                    tempList[tempIndex] = internalStorage[i];
+                    tempIndex++;
+                }
+            }
+            tempList[tempIndex] = internalStorage[index];
+            tempIndex++;
+            for (int i = 0; i < count; i++)
+            {
+                if (Comparer<T>.Default.Compare(internalStorage[index], internalStorage[i]) < 0)
+                {
+                    tempList[tempIndex] = internalStorage[i];
+                    tempIndex++;
+                }
+            }
+            internalStorage = tempList;
+        }
         private static CustomList<T> GetLongestList(CustomList<T> list1, CustomList<T> list2)
         {
             if(list1.Count >= list2.Count)
@@ -201,6 +279,12 @@ namespace MyCustomList
             for(int i = 0; i < smallArray.Length; i++) {
                 largeArray[i] = smallArray[i];
             }
+        }
+        public void Swap(int index1, int index2)
+        {
+            T temporaryStorage = internalStorage[index1];
+            internalStorage[index1] = internalStorage[index2];
+            internalStorage[index2] = temporaryStorage;
         }
         public void DuplicateList(CustomList<T> input)
         {
