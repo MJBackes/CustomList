@@ -15,8 +15,42 @@ namespace MyCustomList
         public int Capacity { get => capacity; }
         public T this[int i]
         {
-            get => internalStorage[i];
-            set => internalStorage[i] = value;
+            get {
+                if (i < count)
+                {
+                    return internalStorage[i];
+                }
+                else
+                {
+                    if (i >= count)
+                    {
+                        throw new ArgumentOutOfRangeException($"Index was too large.");
+                    }
+                    else
+                    {
+                        throw new ArgumentOutOfRangeException($"Index was too small.");
+                    }
+                }
+            }
+
+
+            set {
+                if (i < count)
+                {
+                    internalStorage[i] = value;
+                }
+                else
+                {
+                    if (i >= count)
+                    {
+                        throw new ArgumentOutOfRangeException($"Index was too large.");
+                    }
+                    else
+                    {
+                        throw new ArgumentOutOfRangeException($"Index was too small.");
+                    }
+                }
+            }
         }
         public CustomList()
         {

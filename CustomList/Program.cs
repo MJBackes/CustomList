@@ -19,6 +19,7 @@ namespace MyCustomList
             list.Add('e');
             list.Remove('e');
             Console.WriteLine(list.ToString());
+            Console.WriteLine(list[5]);
             Console.ReadLine();
         }
     }
