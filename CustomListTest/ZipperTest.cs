@@ -25,7 +25,7 @@ namespace CustomListTest
             list2.Add('B');
             list2.Add('C');
             //act
-            actual = list1.Zip(list2);
+            actual = CustomList<char>.Zip(list1, list2);
             //assert
             Assert.AreEqual(expected, actual.ToString());
         }
@@ -44,7 +44,7 @@ namespace CustomListTest
             list2.Add('A');
             list2.Add('B');
             //act
-            actual = list1.Zip(list2);
+            actual = CustomList<char>.Zip(list1, list2);
             //assert
             Assert.AreEqual(expected, actual.ToString());
         }
@@ -60,7 +60,7 @@ namespace CustomListTest
             list1.Add('2');
             list1.Add('3');
             //act
-            actual = list1.Zip(list2);
+            actual = CustomList<char>.Zip(list1, list2);
             //assert
             Assert.AreEqual(expected, actual.ToString());
         }

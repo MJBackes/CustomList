@@ -91,7 +91,7 @@ namespace MyCustomList
         public bool Remove(T input)
         {
             bool foundObjectToBeRemoved = false;
-            T[] tempStorage = new T[internalStorage.Length];
+            T[] tempStorage = new T[capacity];
             int tempIndex = 0;
             for (int i = 0; i < count; i++)
             {
@@ -155,15 +155,15 @@ namespace MyCustomList
             }
             return output;
         }
-        public CustomList<T> Zip(CustomList<T> list2)
+        public static CustomList<T> Zip(CustomList<T> list1, CustomList<T> list2)
         {
-            int maxLength = GetLongestList(this, list2).Count;
+            int maxLength = GetLongestList(list1, list2).Count;
             CustomList<T> output = new CustomList<T>();
             for(int i = 0; i < maxLength; i++)
             {
-                if (i < Count)
+                if (i < list1.Count)
                 {
-                    output.Add(internalStorage[i]);
+                    output.Add(list1[i]);
                 }
                 if (i < list2.Count)
                 {
@@ -172,7 +172,7 @@ namespace MyCustomList
             }
             return output;
         }
-        private CustomList<T> GetLongestList(CustomList<T> list1, CustomList<T> list2)
+        private static CustomList<T> GetLongestList(CustomList<T> list1, CustomList<T> list2)
         {
             if(list1.Count >= list2.Count)
             {

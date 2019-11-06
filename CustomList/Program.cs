@@ -21,6 +21,7 @@ namespace MyCustomList
             list2.Add('b');
             list2.Add('b');
             list2.Add('c');
+            Console.WriteLine(list1[0] < list1[4]);
             foreach(char a in list1)
             {
                 Console.WriteLine(a);
