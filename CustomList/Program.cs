@@ -10,19 +10,19 @@ namespace MyCustomList
     {
         static void Main(string[] args)
         {
-            CustomList<char> list = new CustomList<char>();
-            list.Add('h');
-            list.Add('e');
-            list.Add('l');
-            list.Add('l');
-            list.Add('o');
-            list.Add('e');
-            list.Remove('e');
-            Console.WriteLine(list.Capacity);
-            list.Capacity = 12;
-            Console.WriteLine(list.Capacity);
-            list.Capacity = 2;
-            Console.WriteLine(list.Capacity);
+            CustomList<char> list1 = new CustomList<char>();
+            CustomList<char> list2 = new CustomList<char>();
+            list1.Add('a');
+            list1.Add('a');
+            list1.Add('a');
+            list1.Add('b');
+            list1.Add('b');
+            list2.Add('a');
+            list2.Add('b');
+            list2.Add('b');
+            list2.Add('c');
+            CustomList<char> result = list1 - list2;
+            Console.WriteLine(result.ToString());
             Console.ReadLine();
         }
     }
