@@ -21,6 +21,10 @@ namespace MyCustomList
             list2.Add('b');
             list2.Add('b');
             list2.Add('c');
+            foreach(char a in list1)
+            {
+                Console.WriteLine(a);
+            }
             CustomList<char> result = list1 - list2;
             Console.WriteLine(result.ToString());
             Console.ReadLine();

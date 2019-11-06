@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="AdditionOperatorOverloadTest.cs" />
     <Compile Include="AddMethodTest.cs" />
+    <Compile Include="IterableTest.cs" />
     <Compile Include="MinusOperatorOverrideTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RemoveMethodTest.cs" />

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MyCustomList
 {
-    public class CustomList<T>
+    public class CustomList<T> : IEnumerable
     {
         private T[] internalStorage;
         private int count;
@@ -70,6 +71,13 @@ namespace MyCustomList
             capacity = 4;
             count = 0;
             internalStorage = new T[capacity];
+        }
+        public IEnumerator GetEnumerator()
+        {
+            for (int i = 0; i < count; i++)
+            {
+                yield return internalStorage[i];
+            }
         }
         public void Add(T input)
         {
