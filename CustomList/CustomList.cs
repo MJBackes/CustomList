@@ -174,14 +174,14 @@ namespace MyCustomList
         }
         public void Sort()
         {
-                //if(count <= 16)
-                //{
+            if (Count <= 16)
+            {
                 InsertionSort();
-                //}
-                //else
-                //{
-                //    QuickSort();
-                //}
+            }
+            else
+            {
+                QuickSort();
+            }
         }
         private void InsertionSort()
         {
@@ -206,6 +206,13 @@ namespace MyCustomList
         private void QuickSort()
         {
             int pivot = GetPivot();
+            pivot = MoveLargerElementsToTheRightOf(pivot);
+            CustomList<T> smallerList = GetSmallerList(pivot);
+            CustomList<T> largerList = GetLargerList(pivot);
+            smallerList.Sort();
+            largerList.Sort();
+            CustomList<T> output = smallerList + largerList;
+            CopyListContents(output);
         }
         private int GetPivot()
         {
@@ -226,19 +233,21 @@ namespace MyCustomList
                 return Count - 1;
             }
         }
-        public void MoveLargerElementsToTheRightOf(int index)
+        private int MoveLargerElementsToTheRightOf(int index)
         {
             T[] tempList = new T[capacity];
             int tempIndex = 0;
             for(int i = 0; i < count; i++)
             {
-                if(Comparer<T>.Default.Compare(internalStorage[index], internalStorage[i]) > 0)
+                if(Comparer<T>.Default.Compare(internalStorage[index], internalStorage[i]) > 0 
+                    || Comparer<T>.Default.Compare(internalStorage[index], internalStorage[i]) == 0)
                 {
                     tempList[tempIndex] = internalStorage[i];
                     tempIndex++;
                 }
             }
             tempList[tempIndex] = internalStorage[index];
+            int newPivotLoction = tempIndex;
             tempIndex++;
             for (int i = 0; i < count; i++)
             {
@@ -249,6 +258,25 @@ namespace MyCustomList
                 }
             }
             internalStorage = tempList;
+            return newPivotLoction;
+        }
+        private CustomList<T> GetSmallerList(int pivot)
+        {
+            CustomList<T> output = new CustomList<T>();
+            for(int i = 0; i < pivot; i++)
+            {
+                output.Add(internalStorage[i]);
+            }
+            return output;
+        }
+        private CustomList<T> GetLargerList(int pivot)
+        {
+            CustomList<T> output = new CustomList<T>();
+            for (int i = pivot; i < Count; i++)
+            {
+                output.Add(internalStorage[i]);
+            }
+            return output;
         }
         private static CustomList<T> GetLongestList(CustomList<T> list1, CustomList<T> list2)
         {
@@ -291,6 +319,13 @@ namespace MyCustomList
             for(int i = 0; i < input.Count; i++)
             {
                 Add(input[i]);
+            }
+        }
+        private void CopyListContents(CustomList<T> input)
+        {
+            for (int i = 0; i < input.Count; i++)
+            {
+                internalStorage[i] = input[i];
             }
         }
     }
