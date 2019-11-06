@@ -12,7 +12,22 @@ namespace MyCustomList
         private int count;
         private int capacity;
         public int Count { get => count; }
-        public int Capacity { get => capacity; }
+        public int Capacity
+        {
+            get => capacity;
+            set
+            {
+                if (value > count)
+                {
+                    capacity = value;
+                    internalStorage = SetStorageSize(internalStorage, capacity);
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException($"Can only set Capacity to values larger than the Count of the list.");
+                }
+            }
+        }
         public T this[int i]
         {
             get {
@@ -24,16 +39,14 @@ namespace MyCustomList
                 {
                     if (i >= count)
                     {
-                        throw new ArgumentOutOfRangeException($"Index was too large.");
+                        throw new IndexOutOfRangeException($"Index was too large.");
                     }
                     else
                     {
-                        throw new ArgumentOutOfRangeException($"Index was too small.");
+                        throw new IndexOutOfRangeException($"Index was too small.");
                     }
                 }
             }
-
-
             set {
                 if (i < count)
                 {
@@ -43,11 +56,11 @@ namespace MyCustomList
                 {
                     if (i >= count)
                     {
-                        throw new ArgumentOutOfRangeException($"Index was too large.");
+                        throw new IndexOutOfRangeException($"Index was too large.");
                     }
                     else
                     {
-                        throw new ArgumentOutOfRangeException($"Index was too small.");
+                        throw new IndexOutOfRangeException($"Index was too small.");
                     }
                 }
             }
@@ -166,6 +179,12 @@ namespace MyCustomList
         {
             capacity *= 2;
             T[] tempStorage = new T[capacity];
+            CopyOneArrayOntoAnother(input, tempStorage);
+            return tempStorage;
+        }
+        private T[] SetStorageSize(T[] input, int size)
+        {
+            T[] tempStorage = new T[size];
             CopyOneArrayOntoAnother(input, tempStorage);
             return tempStorage;
         }

@@ -18,8 +18,11 @@ namespace MyCustomList
             list.Add('o');
             list.Add('e');
             list.Remove('e');
-            Console.WriteLine(list.ToString());
-            Console.WriteLine(list[5]);
+            Console.WriteLine(list.Capacity);
+            list.Capacity = 12;
+            Console.WriteLine(list.Capacity);
+            list.Capacity = 2;
+            Console.WriteLine(list.Capacity);
             Console.ReadLine();
         }
     }
