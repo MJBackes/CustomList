@@ -235,8 +235,8 @@ namespace MyCustomList
         {
             int pivot = GetPivot();
             pivot = MoveLargerElementsToTheRightOf(pivot);
-            CustomList<T> smallerList = GetSmallerList(pivot);
-            CustomList<T> largerList = GetLargerList(pivot);
+            CustomList<T> smallerList = GetLeftList(pivot);
+            CustomList<T> largerList = GetRightList(pivot);
             smallerList.Sort();
             largerList.Sort();
             smallerList += largerList;
@@ -245,23 +245,6 @@ namespace MyCustomList
         private int GetPivot()
         {
             return rng.Next(count);
-            //if(Count < 3)
-            //{
-            //    return 0;
-            //}
-            //CustomList<T> MedianFinder = new CustomList<T> { internalStorage[0], internalStorage[Count / 2], internalStorage[Count - 1] };
-            //MedianFinder.InsertionSort();
-            //if (EqualityComparer<T>.Default.Equals(internalStorage[0], MedianFinder[1])){
-            //    return 0;
-            //}
-            //else if (EqualityComparer<T>.Default.Equals(internalStorage[Count/2], MedianFinder[1])){
-            //    return Count/2;
-            //}
-            //else
-            //{
-            //    return Count - 1;
-            //}
-            
         }
         private int MoveLargerElementsToTheRightOf(int index)
         {
@@ -288,7 +271,7 @@ namespace MyCustomList
             internalStorage = tempList;
             return newPivotLoction;
         }
-        private CustomList<T> GetSmallerList(int pivot)
+        private CustomList<T> GetLeftList(int pivot)
         {
             CustomList<T> output = new CustomList<T>();
             for(int i = 0; i < pivot; i++)
@@ -297,7 +280,7 @@ namespace MyCustomList
             }
             return output;
         }
-        private CustomList<T> GetLargerList(int pivot)
+        private CustomList<T> GetRightList(int pivot)
         {
             CustomList<T> output = new CustomList<T>();
             for (int i = pivot; i < Count; i++)
