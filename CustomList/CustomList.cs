@@ -12,6 +12,7 @@ namespace MyCustomList
         private T[] internalStorage;
         private int count;
         private int capacity;
+        private Random rng;
         public int Count { get => count; }
         public int Capacity
         {
@@ -71,6 +72,7 @@ namespace MyCustomList
             capacity = 4;
             count = 0;
             internalStorage = new T[capacity];
+            rng = new Random();
         }
         public IEnumerator GetEnumerator()
         {
@@ -207,37 +209,33 @@ namespace MyCustomList
         {
             int pivot = GetPivot();
             pivot = MoveLargerElementsToTheRightOf(pivot);
-            Console.WriteLine(ToString());
             CustomList<T> smallerList = GetSmallerList(pivot);
-            Console.WriteLine(smallerList.ToString());
             CustomList<T> largerList = GetLargerList(pivot);
-            Console.WriteLine(largerList.ToString());
             smallerList.Sort();
-            Console.WriteLine(smallerList.ToString());
             largerList.Sort();
-            Console.WriteLine(largerList.ToString());
             smallerList += largerList;
             CopyListContents(smallerList);
-            Console.WriteLine(smallerList.ToString());
         }
         private int GetPivot()
         {
-            if(Count < 3)
-            {
-                return 0;
-            }
-            CustomList<T> MedianFinder = new CustomList<T> { internalStorage[0], internalStorage[Count / 2], internalStorage[Count - 1] };
-            MedianFinder.InsertionSort();
-            if (EqualityComparer<T>.Default.Equals(internalStorage[0], MedianFinder[1])){
-                return 0;
-            }
-            else if (EqualityComparer<T>.Default.Equals(internalStorage[Count/2], MedianFinder[1])){
-                return Count/2;
-            }
-            else
-            {
-                return Count - 1;
-            }
+            return rng.Next(count);
+            //if(Count < 3)
+            //{
+            //    return 0;
+            //}
+            //CustomList<T> MedianFinder = new CustomList<T> { internalStorage[0], internalStorage[Count / 2], internalStorage[Count - 1] };
+            //MedianFinder.InsertionSort();
+            //if (EqualityComparer<T>.Default.Equals(internalStorage[0], MedianFinder[1])){
+            //    return 0;
+            //}
+            //else if (EqualityComparer<T>.Default.Equals(internalStorage[Count/2], MedianFinder[1])){
+            //    return Count/2;
+            //}
+            //else
+            //{
+            //    return Count - 1;
+            //}
+            
         }
         private int MoveLargerElementsToTheRightOf(int index)
         {
@@ -245,8 +243,7 @@ namespace MyCustomList
             int tempIndex = 0;
             for(int i = 0; i < count; i++)
             {
-                if(Comparer<T>.Default.Compare(internalStorage[index], internalStorage[i]) > 0 
-                    || Comparer<T>.Default.Compare(internalStorage[index], internalStorage[i]) == 0)
+                if(Comparer<T>.Default.Compare(internalStorage[index], internalStorage[i]) > 0 )
                 {
                     tempList[tempIndex] = internalStorage[i];
                     tempIndex++;
@@ -255,7 +252,8 @@ namespace MyCustomList
             int newPivotLoction = tempIndex;
             for (int i = 0; i < count; i++)
             {
-                if (Comparer<T>.Default.Compare(internalStorage[index], internalStorage[i]) < 0)
+                if (Comparer<T>.Default.Compare(internalStorage[index], internalStorage[i]) < 0
+                                        || Comparer<T>.Default.Compare(internalStorage[index], internalStorage[i]) == 0)
                 {
                     tempList[tempIndex] = internalStorage[i];
                     tempIndex++;
