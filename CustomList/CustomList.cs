@@ -93,42 +93,44 @@ namespace MyCustomList
         public bool Remove(T input)
         {
             bool foundObjectToBeRemoved = false;
-            T[] tempStorage = new T[capacity];
             int tempIndex = 0;
             for (int i = 0; i < count; i++)
             {
-                if (internalStorage[i].Equals(input) && !foundObjectToBeRemoved)
+                if(tempIndex >= capacity)
+                {
+                    internalStorage[i] = default;
+                    continue;
+                }
+                else if (internalStorage[tempIndex].Equals(input) && !foundObjectToBeRemoved)
                 {
                     foundObjectToBeRemoved = true;
-                }
-                else
-                {
-                    tempStorage[tempIndex] = internalStorage[i];
                     tempIndex++;
                 }
+                internalStorage[i] = internalStorage[tempIndex];
+                tempIndex++;
             }
-            internalStorage = tempStorage;
             count--;
             return foundObjectToBeRemoved;
         }
         public int RemoveAll(T input)
         {
             int removedCount = 0;
-            T[] tempStorage = new T[capacity];
             int tempIndex = 0;
             for (int i = 0; i < count; i++)
             {
-                if (!internalStorage[i].Equals(input))
+                if (tempIndex >= capacity)
                 {
-                    tempStorage[tempIndex] = internalStorage[i];
-                    tempIndex++;
+                    internalStorage[i] = default;
+                    continue;
                 }
-                else
+                else if (internalStorage[tempIndex].Equals(input))
                 {
+                    tempIndex++;
                     removedCount++;
                 }
+                internalStorage[i] = internalStorage[tempIndex];
+                tempIndex++;
             }
-            internalStorage = tempStorage;
             count -= removedCount;
             return removedCount;
         }

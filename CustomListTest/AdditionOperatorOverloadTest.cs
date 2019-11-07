@@ -40,24 +40,12 @@ namespace CustomListTest
         public void PlusOperator_LargerListAddedToSmallerList_ResultantListHasFullContentsOfBothLists()
         {
             //arrange
-            CustomList<char> expected = new CustomList<char>();
-            expected.Add('a');
-            expected.Add('B');
-            expected.Add('C');
-            expected.Add('D');
-            expected.Add('E');
-            expected.Add('F');
-            CustomList<char> actual;
-            CustomList<char> list1 = new CustomList<char>();
-            CustomList<char> list2 = new CustomList<char>();
-            list1.Add('a');
-            list2.Add('B');
-            list2.Add('C');
-            list2.Add('D');
-            list2.Add('E');
-            list2.Add('F');
+            string expected = "aBCDEF";
+            string actual;
+            CustomList<char> list1 = new CustomList<char> { 'a' };
+            CustomList<char> list2 = new CustomList<char> { 'B', 'C', 'D', 'E', 'F' };
             //act
-            actual = list1 + list2;
+            actual = (list1 + list2).ToString();
             //assert
             Assert.AreEqual(expected.ToString(), actual.ToString());
         }
