@@ -25,11 +25,11 @@ namespace CustomListTest
         [TestMethod]
         public void Reverse_ListOfInts_OrderOfSelectedRangeIsReversed()
         {
-            CustomList<int> list = new CustomList<int> { 8, 3, 5, 7, 1, 2, 5, 4, 9, 6, 5, 8, 3, 5, 6, 3, 2, 4, 6, 7, 3, 5 };
-            string expected = "8357125538569463246735";
+            CustomList<int> list = new CustomList<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            string expected = "123456789987654321123456789";
             string actual;
 
-            list.Reverse(6,13);
+            list.Reverse(9,9);
             actual = list.ToString();
 
             Assert.AreEqual(expected, actual);

@@ -137,6 +137,35 @@ namespace MyCustomList
             internalStorage = new T[capacity];
             count = 0;
         }
+        public void Reverse()
+        {
+            T[] tempStorage = new T[capacity];
+            for(int i = 0; i < count; i++)
+            {
+                tempStorage[i] = internalStorage[count - (i + 1)];
+            }
+            internalStorage = tempStorage;
+        }
+        public void Reverse(int start, int numberToReverse)
+        {
+            int finish = start + numberToReverse;
+            T[] tempStorage = new T[capacity];
+            for(int i = 0; i < start; i++)
+            {
+                tempStorage[i] = internalStorage[i];
+            }
+            int counter = 0;
+            for (int i = start; i < finish; i++)
+            {
+                tempStorage[i] = internalStorage[finish - (counter + 1)];
+                counter++;
+            }
+            for (int i = finish; i < count; i++)
+            {
+                tempStorage[i] = internalStorage[i];
+            }
+            internalStorage = tempStorage;
+        }
         public override string ToString()
         {
             StringBuilder output = new StringBuilder("");
