@@ -111,6 +111,32 @@ namespace MyCustomList
             count--;
             return foundObjectToBeRemoved;
         }
+        public int RemoveAll(T input)
+        {
+            int removedCount = 0;
+            T[] tempStorage = new T[capacity];
+            int tempIndex = 0;
+            for (int i = 0; i < count; i++)
+            {
+                if (!internalStorage[i].Equals(input))
+                {
+                    tempStorage[tempIndex] = internalStorage[i];
+                    tempIndex++;
+                }
+                else
+                {
+                    removedCount++;
+                }
+            }
+            internalStorage = tempStorage;
+            count -= removedCount;
+            return removedCount;
+        }
+        public void Clear()
+        {
+            internalStorage = new T[capacity];
+            count = 0;
+        }
         public override string ToString()
         {
             StringBuilder output = new StringBuilder("");
