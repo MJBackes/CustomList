@@ -207,12 +207,18 @@ namespace MyCustomList
         {
             int pivot = GetPivot();
             pivot = MoveLargerElementsToTheRightOf(pivot);
+            Console.WriteLine(ToString());
             CustomList<T> smallerList = GetSmallerList(pivot);
+            Console.WriteLine(smallerList.ToString());
             CustomList<T> largerList = GetLargerList(pivot);
+            Console.WriteLine(largerList.ToString());
             smallerList.Sort();
+            Console.WriteLine(smallerList.ToString());
             largerList.Sort();
-            CustomList<T> output = smallerList + largerList;
-            CopyListContents(output);
+            Console.WriteLine(largerList.ToString());
+            smallerList += largerList;
+            CopyListContents(smallerList);
+            Console.WriteLine(smallerList.ToString());
         }
         private int GetPivot()
         {
@@ -246,9 +252,7 @@ namespace MyCustomList
                     tempIndex++;
                 }
             }
-            tempList[tempIndex] = internalStorage[index];
             int newPivotLoction = tempIndex;
-            tempIndex++;
             for (int i = 0; i < count; i++)
             {
                 if (Comparer<T>.Default.Compare(internalStorage[index], internalStorage[i]) < 0)
