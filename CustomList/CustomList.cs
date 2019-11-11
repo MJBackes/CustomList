@@ -26,7 +26,7 @@ namespace MyCustomList
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException($"Can only set Capacity to values larger than the Count of the list.");
+                    throw new ArgumentOutOfRangeException("Can only set Capacity to values larger than the Count of the list.");
                 }
             }
         }
@@ -41,11 +41,11 @@ namespace MyCustomList
                 {
                     if (i >= count)
                     {
-                        throw new IndexOutOfRangeException($"Index was too large.");
+                        throw new IndexOutOfRangeException("Index was too large.");
                     }
                     else
                     {
-                        throw new IndexOutOfRangeException($"Index was too small.");
+                        throw new IndexOutOfRangeException("Index was too small.");
                     }
                 }
             }
@@ -58,11 +58,11 @@ namespace MyCustomList
                 {
                     if (i >= count)
                     {
-                        throw new IndexOutOfRangeException($"Index was too large.");
+                        throw new IndexOutOfRangeException("Index was too large.");
                     }
                     else
                     {
-                        throw new IndexOutOfRangeException($"Index was too small.");
+                        throw new IndexOutOfRangeException("Index was too small.");
                     }
                 }
             }
@@ -125,8 +125,11 @@ namespace MyCustomList
                 }
                 else if (internalStorage[tempIndex].Equals(input))
                 {
-                    tempIndex++;
-                    removedCount++;
+                    do
+                    {
+                        tempIndex++;
+                        removedCount++;
+                    } while (internalStorage[tempIndex].Equals(input));
                 }
                 internalStorage[i] = internalStorage[tempIndex];
                 tempIndex++;

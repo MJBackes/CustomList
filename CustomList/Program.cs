@@ -14,9 +14,7 @@ namespace MyCustomList
             Console.WriteLine(list.ToString());
             list.Sort();
             Console.WriteLine(list.ToString());
-            list.Reverse();
-            Console.WriteLine(list.ToString());
-            list.Reverse(0, 5);
+            list.RemoveAll(8);
             Console.WriteLine(list.ToString());
             //CustomList<char> list2 = new CustomList<char>() { 'c', 'k', 't', 'c', 'f', 'a', 'w', 'b','y','u','r','e','s','g',
             //    'o','d','j','n','p','z','x','h','i','q','m','l','v','c', 'k', 't', 'c', 'f', 'a', 'w', 'b','y','u','r','e','s','g',
