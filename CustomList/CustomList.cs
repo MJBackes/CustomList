@@ -33,7 +33,7 @@ namespace MyCustomList
         public T this[int i]
         {
             get {
-                if (i < count)
+                if (i < count && i >= 0)
                 {
                     return internalStorage[i];
                 }
@@ -50,7 +50,7 @@ namespace MyCustomList
                 }
             }
             set {
-                if (i < count)
+                if (i < count && i >= 0)
                 {
                     internalStorage[i] = value;
                 }
@@ -105,11 +105,11 @@ namespace MyCustomList
                 {
                     foundObjectToBeRemoved = true;
                     tempIndex++;
+                    count--;
                 }
                 internalStorage[i] = internalStorage[tempIndex];
                 tempIndex++;
             }
-            count--;
             return foundObjectToBeRemoved;
         }
         public int RemoveAll(T input)
