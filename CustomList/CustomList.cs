@@ -245,6 +245,48 @@ namespace MyCustomList
                 QuickSort();
             }
         }
+        //public T[] ToArray()
+        //{
+        //    T[] output = new T[Count];
+        //    for (int i = 0; i < Count; i++)
+        //        output[i] = internalStorage[i];
+        //    return output;
+        //}
+        public T[] ToArray(T[] input = null,int index = 0)
+        {
+            if (input == null)
+                input = new T[Count];
+            input[index] = internalStorage[index];
+            if (index == Count - 1)
+                return input;
+            return ToArray(input, ++index);
+        }
+        public bool Contains(T input,int index = 0)
+        {
+            if (Comparer<T>.Default.Compare(internalStorage[index], input) == 0)
+                return true;
+            else if (index == Count - 1)
+                return false;
+            else
+                return Contains(input, ++index);
+        }
+        public bool Exists(Predicate<T> predicate,int index = 0)
+        {
+            if(predicate(internalStorage[index]))
+                return true;
+            if (index == Count - 1)
+                return false;
+            return Exists(predicate, ++index);
+        }
+        public T Find(Predicate<T> predicate,int index = 0)
+        {
+            if (predicate(internalStorage[index]))
+                return internalStorage[index];
+            else if (index == Count - 1)
+                return default;
+            else
+                return Find(predicate, ++index);
+        }
         private void InsertionSort()
         {
 
