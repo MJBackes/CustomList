@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -286,6 +287,94 @@ namespace MyCustomList
                 return default;
             else
                 return Find(predicate, ++index);
+        }
+        public CustomList<T> FindAll(Predicate<T> predicate, CustomList<T> output = null, int index = 0) 
+        {
+            if (output == null)
+                output = new CustomList<T>();
+            if (predicate(internalStorage[index]))
+                output.Add(internalStorage[index]);
+            if (index == Count - 1)
+                return output;
+            else
+                return FindAll(predicate, output, ++index);
+        }
+        public int FindIndex(Predicate<T> predicate, int index = 0)
+        {
+            if (predicate(internalStorage[index]))
+                return index;
+            else if (index == Count - 1)
+                return -1;
+            else
+                return FindIndex(predicate, ++index);
+        }
+        public int FindIndex(int index,Predicate<T> predicate)
+        {
+            if (predicate(internalStorage[index]))
+                return index;
+            else if (index == Count - 1)
+                return -1;
+            else
+                return FindIndex(++index,predicate);
+        }
+        public int FindIndex(int index, int stopIndex,Predicate<T> predicate)
+        {
+            if (predicate(internalStorage[index]))
+                return index;
+            else if (index == stopIndex)
+                return -1;
+            else
+                return FindIndex(++index,stopIndex,predicate);
+        }
+        public int FindLastIndex(Predicate<T> predicate,int index = -1)
+        {
+            if (index == -1)
+                index = Count - 1;
+            if (predicate(internalStorage[index]))
+                return index;
+            if (index == 0)
+                return -1;
+            return FindLastIndex(predicate, --index);
+        }
+        public int FindLastIndex(int startingIndex, Predicate<T> predicate, int index = -1)
+        {
+            if (index == -1)
+                index = Count - 1;
+            if (predicate(internalStorage[index]))
+                return index;
+            if (index == startingIndex)
+                return -1;
+            return FindLastIndex(startingIndex, predicate, --index);
+        }
+        public int FindLastIndex(int startingIndex, int index, Predicate<T> predicate)
+        {
+            if (startingIndex > index)
+                throw new ArgumentOutOfRangeException("Starting index can not be larger than the Ending index.");
+            if (index == -1)
+                index = Count - 1;
+            if (predicate(internalStorage[index]))
+                return index;
+            if (index == startingIndex)
+                return -1;
+            return FindLastIndex(startingIndex, --index, predicate);
+        }
+        public ReadOnlyCollection<T> AsReadOnly()
+        {
+            return new ReadOnlyCollection<T>(ToArray());
+        }
+        public void CopyTo(T[] array, int arrayIndex = 0,int recursiveIndex = 0)
+        {
+            if (arrayIndex == array.Length || recursiveIndex == Count)
+                return;
+            array[arrayIndex] = internalStorage[recursiveIndex];
+            CopyTo(array, ++arrayIndex, ++recursiveIndex);
+        }
+        public void CopyTo(int recursiveIndex,T[] array, int arrayIndex = 0)
+        {
+            if (arrayIndex == array.Length || recursiveIndex == Count)
+                return;
+            array[arrayIndex] = internalStorage[recursiveIndex];
+            CopyTo(array, ++arrayIndex, ++recursiveIndex);
         }
         private void InsertionSort()
         {
